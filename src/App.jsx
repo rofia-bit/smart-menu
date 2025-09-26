@@ -15,6 +15,7 @@ export default function App() {
 
   return (
     <div>
+      
       <CategoryBar
         selectedCategory={selectedCategory}
         onCategoryChange={setSelectedCategory}
