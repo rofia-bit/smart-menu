@@ -8,7 +8,7 @@ export default function CartButton({ itemCount }) {
         position: "fixed",
         bottom: "20px",
         right: "20px",
-        backgroundColor: "#e74b0d",
+        backgroundColor: "rgb(239, 64, 0)",
         color: "white",
         border: "none",
         borderRadius: "50%",
