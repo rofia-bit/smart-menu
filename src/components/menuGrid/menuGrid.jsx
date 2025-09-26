@@ -67,7 +67,7 @@ export default function MenuGrid({ selectedCategory }) {
                 className="menu-card-image"
               />
             ) : (
-              <div className="menu-card-placeholder">No Image</div>
+              <div className="menu-card-placeholder hidden">No Image</div>
             )}
 
             <div className="menu-card-body">

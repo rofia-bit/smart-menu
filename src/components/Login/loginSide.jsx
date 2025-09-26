@@ -1,35 +1,30 @@
 import React, { useState } from "react";
+import { UserRoundCheck, ShoppingBag, ChevronDown, ChevronUp, Phone } from "lucide-react";
 import "./Login.css";   
 
 const sections = [
   {
     title: "Account Info",
-    icon: "👤",
+    icon: <UserRoundCheck />,
     items: [
       "Profile",
-      "Rewards History",
-      "Payment Methods",
+      "Coins & rewards",
       "Delete Account",
     ],
   },
   {
     title: "My Orders",
-    icon: "🧾",
+    icon: <ShoppingBag />,
     items: [
       "Order History",
       "Upcoming Orders",
     ],
   },
   {
-    title: "Find a Restaurant",
-    icon: "📍",
-    items: [],
-  },
-  {
     title: "Support",
-    icon: "📞",
+    icon: <Phone />,
     items: [
-      "Visit Support",
+      "+213 ---------",
       "FAQs",
     ],
   },
@@ -63,7 +58,11 @@ export default function LoginSidebar({ isOpen, onClose }) {
               <span className="section-icon">{section.icon}</span>
               {section.title}
               {section.items.length > 0 && (
-                <span className="arrow">{openSections.includes(idx) ? "▲" : "▼"}</span>
+                <span className="arrow">
+                  {openSections.includes(idx)
+                    ? <ChevronUp size={18} color="#f97316" />
+                    : <ChevronDown size={18} color="#f97316" />}
+                </span>
               )}
             </div>
             {section.items.length > 0 && openSections.includes(idx) && (
@@ -75,22 +74,15 @@ export default function LoginSidebar({ isOpen, onClose }) {
             )}
           </div>
         ))}
-
-        <div className="quick-links">
-          <button>🍽️ Catering</button>
-          <button>🎁 Gift Cards</button>
-          <button>🏛️ Foundation</button>
-        </div>
-
-        <div className="legal-links">
-          <a href="#">Legal Terms & Policies</a> | <a href="#">We're Hiring</a> | <a href="#">Nutrition & Allergen</a> | <a href="#">Foundation</a> | <a href="#">Open A Popeyes</a> | <a href="#">All Locations</a> | <a href="#">App Diagnostics</a>
-        </div>
-
-        <div className="sidebar-footer">
-          <small>
-            Product availability, prices, offers and discounts may vary from restaurant. Popeyes printed coupons not valid on online orders.
-          </small>
-        </div>
+       
+      </div>
+      <div className="sidebar-language">
+        <label htmlFor="language-select" style={{ marginRight: 8, fontWeight: 500 }}>Language:</label>
+        <select id="language-select" style={{ padding: "4px 8px", borderRadius: 6 }}>
+          <option value="en">English</option>
+          <option value="fr">Français</option>
+          <option value="ar">Arabic</option>
+        </select>
       </div>
     </div>
   );
