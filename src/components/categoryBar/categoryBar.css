@@ -2,7 +2,10 @@
   display: flex;
   justify-content: center;
   background: rgb(239, 64, 0);
-  padding: 0.5rem 0;
+  padding: 0.8rem 1rem;
+  border-radius: 20px;
+  margin: 0 1rem;
+
 }
 
 .category-container {
