@@ -1,7 +1,7 @@
 .menu-section {
   background: #fdfdfb;
   min-height: 100vh;
-  padding: 1.5rem 1rem;
+  padding: 1rem;
 }
 
 
@@ -11,14 +11,15 @@
 }
 
 .menu-header h2 {
-  font-size: 1.5rem;
+  font-size: 2rem;
+  font-family: 'Chicken Sans Bold';
   font-weight: 700;
-  color: #0f2c55;
+  color: rgb(66, 66, 66);
   margin-bottom: 0.25rem;
 }
 
 .menu-header p {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: #6b7280;
 }
 

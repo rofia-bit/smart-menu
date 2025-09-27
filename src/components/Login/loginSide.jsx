@@ -135,10 +135,10 @@ export default function LoginSidebar({ isOpen, onClose, user, onLogin, onLogout 
                     setShowQuestions(true);
                   }}
                 >
-                  {t("yes")}
+                  {t("Yes")}
                 </button>
                 <button className="secondary-btn" onClick={() => setShowQuestionPrompt(false)}>
-                  {t("remindLater")}
+                  {t("Remind me later")}
                 </button>
               </div>
             </div>
