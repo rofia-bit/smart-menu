@@ -164,3 +164,125 @@
   font-size: 1.1rem;
 }
 
+
+
+
+
+
+
+/* Login form styles */
+.auth-panel {
+  padding: 8px 0 14px 0;
+}
+.auth-intro {
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+/* form layout */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #fff;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #f1f1f1;
+  box-shadow: 0 6px 18px rgba(15,23,42,0.04);
+}
+
+.login-form label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #111827;
+}
+
+.login-form input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #e6e6e6;
+  font-size: 0.95rem;
+  color: #111827;
+  background: #ffffff;
+  transition: box-shadow 120ms ease, border-color 120ms ease, transform 80ms ease;
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: rgb(239, 64, 0);
+  box-shadow: 0 6px 18px rgba(249,115,22,0.06);
+  transform: translateY(-1px);
+}
+
+/* action buttons */
+.auth-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.primary-btn {
+  flex: 1;
+  background: rgb(239, 64, 0);
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.primary-btn:hover { transform: translateY(-1px); }
+
+.secondary-btn {
+  background: transparent;
+  border: 1px solid #ececec;
+  color: #111827;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* header greeting & logout */
+.sidebar-header h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0;
+}
+.logout-btn {
+  background: #fff ;
+  border: 1px solid rgba(0,0,0,0.06);
+  color: #111827;
+  padding: 3px 6px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.logout-btn:hover {
+  background: #f8f8f8;
+}
+
+/* animated panel (kept if present from earlier updates) */
+.section-panel {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-6px);
+  overflow: hidden;
+  transition: max-height 320ms cubic-bezier(.2,.9,.2,1), opacity 260ms ease, transform 320ms cubic-bezier(.2,.9,.2,1);
+}
+.section-panel.open {
+  max-height: 420px;
+  opacity: 1;
+  transform: translateY(0);
+}
+.section-panel .section-list li {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 300ms ease var(--delay), transform 300ms ease var(--delay);
+  transition-delay: var(--delay);
+}
+.section-panel.open .section-list li {
+  opacity: 1;
+  transform: translateY(0);
+}
+

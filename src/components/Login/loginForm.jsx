@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 
 export default function LoginForm({ onLogin }) {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!email || !password) return alert("Fill all fields");
-    onLogin({ email, password });
+    if (!username || !password) return alert("Fill all fields");
+    onLogin({ username, password });
   };
 
   return (
     <form className="login-form" onSubmit={handleSubmit}>
-      <label>Email</label>
+      <label>Username</label>
       <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Enter email"
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        placeholder="Choose a username"
       />
 
       <label>Password</label>
@@ -28,7 +28,16 @@ export default function LoginForm({ onLogin }) {
         placeholder="Enter password"
       />
 
-      <button type="submit">Login</button>
+      <div className="auth-actions">
+        <button type="submit" className="primary-btn">Login</button>
+        <button
+          type="button"
+          className="secondary-btn"
+          onClick={() => alert("Sign up not implemented yet")}
+        >
+          Sign up
+        </button>
+      </div>
     </form>
   );
 }

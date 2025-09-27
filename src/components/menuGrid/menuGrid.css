@@ -1,4 +1,3 @@
-
 .menu-section {
   background: #fdfdfb;
   min-height: 100vh;
@@ -92,4 +91,105 @@
   font-size: 0.85rem;
   font-weight: 700;
   color: rgb(239, 64, 0);
+}
+
+/* Loading state */
+.menu-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 36px 12px;
+}
+.loading-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fff;
+  padding: 14px 18px;
+  border-radius: 12px;
+  box-shadow: 0 8px 22px rgba(15,23,42,0.06);
+  border: 1px solid rgba(0,0,0,0.03);
+}
+.spinner {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 4px solid rgba(249,115,22,0.12);
+  border-top-color: #f97316; /* orange accent */
+  animation: spin 900ms linear infinite;
+  box-shadow: 0 6px 18px rgba(249,115,22,0.06) inset;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.loading-text strong {
+  display: block;
+  color: #111827;
+  font-size: 1rem;
+}
+.loading-sub {
+  font-size: 0.88rem;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+/* Error state */
+.menu-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 12px;
+}
+.error-box {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 16px 18px;
+  background: #fff7f7;
+  border-radius: 12px;
+  border: 1px solid #fee2e2;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(235, 87, 87, 0.03);
+}
+.error-icon {
+  flex: 0 0 44px;
+}
+.error-text strong {
+  display: block;
+  color: #991b1b;
+  font-size: 1rem;
+}
+.error-sub {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+.error-actions {
+  margin-top: 8px;
+}
+.retry-btn {
+  background: #fff;
+  color: #f97316;
+  border: 1px solid rgba(249,115,22,0.12);
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 160ms ease, transform 120ms ease;
+}
+.retry-btn:hover {
+  background: #f97316;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* ensure these states are responsive */
+@media (max-width: 520px) {
+  .loading-box, .error-box {
+    width: calc(100% - 24px);
+    padding: 12px;
+    gap: 10px;
+  }
+  .spinner { width: 40px; height: 40px; }
 }
