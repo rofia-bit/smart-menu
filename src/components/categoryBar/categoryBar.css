@@ -1,8 +1,10 @@
 .category-bar {
   display: flex;
   justify-content: center;
-  background: rgb(239, 64, 0);
-  padding: 0.5rem 0;
+  background: linear-gradient(135deg, rgb(242, 65, 1) 0%, rgb(255, 72, 0) 50%, rgb(253, 139, 45) 100%);
+  padding: 0.8rem 1rem;
+  border-radius: 20px;
+  margin: 0 1rem;
 }
 
 .category-container {
@@ -41,6 +43,8 @@
 
 .category-label {
   font-size: 0.75rem;
+  font-family: 'Chicken Sans Regular';
+  font-weight: 800;
   white-space: nowrap;
 }
 

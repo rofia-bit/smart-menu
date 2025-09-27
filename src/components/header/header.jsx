@@ -1,29 +1,36 @@
-import React from 'react'
-import { User, Coins} from "lucide-react";
+import React, { useState } from "react";
 import Logo from '../../assets/Logo.png';
-import './header.css';
+import { User, Coins } from "lucide-react";
+import LoginModal from "../Login/Login";
+import "./Header.css";
 
 const Header = () => {
+  const [showLogin, setShowLogin] = useState(false);
+
   return (
-     <header className="header">
-      {/* Logo image on the far left */}
-      <div className="logo">
-        <img src={Logo} alt="App Logo" className="logo-img" />
-      </div>
+    <>
+      <header className="header">
+        {/* Logo on left */}
+        <div className="logo">
+          <img src={Logo} alt="App Logo" className="logo-img" />
+        </div>
 
-      {/* Right side: coins + avatar */}
-      <div className="right-side">
-        <div className="coin-container">
-          <Coins className="coin-icon" />
-          <span className="coin-number">120</span>
+        {/* Right side: coins + avatar */}
+        <div className="right-side">
+          <div className="coin-container">
+            <Coins className="coin-icon" />
+            <span className="coin-number">120</span>
+          </div>
+          <div className="avatar" onClick={() => setShowLogin(true)}>
+            <User className="icon" />
+          </div>
         </div>
-        <div className="avatar">
-          <User className="icon" />
-        </div>
-      </div>
-    </header>
+      </header>
+
+      {/* Login modal */}
+      {showLogin && <LoginModal onClose={() => setShowLogin(false)} />}
+    </>
   );
-
-}
+};
 
 export default Header;
