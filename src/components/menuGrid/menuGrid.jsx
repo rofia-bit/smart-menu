@@ -7,20 +7,27 @@ export default function MenuGrid({ selectedCategory }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  
+  const fetchMenu = () => {
+    setLoading(true);
+    setError(null);
+    axios
+      .get("http://localhost:8000/api/menu-items/") 
+      .then((response) => {
+        console.log("API response:", response.data);  
+        setMenuItems(response.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching menu items:", err);
+        setError("Failed to load menu.");
+        setLoading(false);
+      });
+  };
+
   useEffect(() => {
-  axios
-    .get("http://localhost:8000/api/menu-items/") 
-    .then((response) => {
-      console.log("API response:", response.data);  
-      setMenuItems(response.data);
-      setLoading(false);
-    })
-    .catch((err) => {
-      console.error("Error fetching menu items:", err);
-      setError("Failed to load menu.");
-      setLoading(false);
-    });
-}, []);
+    fetchMenu();
+  }, []);
 
 
   const filteredItems =
@@ -30,8 +37,14 @@ export default function MenuGrid({ selectedCategory }) {
 
   if (loading) {
     return (
-      <div className="menu-loading">
-        <p>Loading menu...</p>
+      <div className="menu-loading" aria-busy="true">
+        <div className="loading-box">
+          <div className="spinner" role="img" aria-label="Loading"></div>
+          <div className="loading-text">
+            <strong>Loading menu...</strong>
+            <div className="loading-sub">Fetching fresh items for you</div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -39,14 +52,27 @@ export default function MenuGrid({ selectedCategory }) {
   if (error) {
     return (
       <div className="menu-error">
-        <p>{error}</p>
+        <div className="error-box" role="alert">
+          <svg className="error-icon" viewBox="0 0 24 24" width="36" height="36" aria-hidden>
+            <circle cx="12" cy="12" r="10" fill="#fee2e2"></circle>
+            <path d="M12 7v6" stroke="#ef4444" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"></path>
+            <path d="M12 16h.01" stroke="#ef4444" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"></path>
+          </svg>
+          <div className="error-text">
+            <strong>Could not load menu</strong>
+            <div className="error-sub">Check your connection or try again.</div>
+            <div className="error-actions">
+              <button className="retry-btn" onClick={fetchMenu}>Retry</button>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 
 
   const addToCart = (item) => {
-    // cart logic here
+    // cart logic here if u want (not necessary for now)
     alert(`${item.name} added to cart!`);
   };
 
@@ -67,7 +93,7 @@ export default function MenuGrid({ selectedCategory }) {
                 className="menu-card-image"
               />
             ) : (
-              <div className="menu-card-placeholder">No Image</div>
+              <div className="menu-card-placeholder hidden">No Image</div>
             )}
 
             <div className="menu-card-body">
@@ -77,6 +103,8 @@ export default function MenuGrid({ selectedCategory }) {
               <button onClick={() => addToCart(item)} className="add-btn">
                 Add to Cart
               </button>
+              {/*a heart icon for favorites ADD LATER!!*/}
+
 
             </div>
           </article>
