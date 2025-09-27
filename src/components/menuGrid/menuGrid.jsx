@@ -7,7 +7,7 @@ export default function MenuGrid({ selectedCategory }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // fetch function so retry can call it
+  
   const fetchMenu = () => {
     setLoading(true);
     setError(null);
@@ -72,7 +72,7 @@ export default function MenuGrid({ selectedCategory }) {
 
 
   const addToCart = (item) => {
-    // cart logic here
+    // cart logic here if u want (not necessary for now)
     alert(`${item.name} added to cart!`);
   };
 
@@ -103,6 +103,8 @@ export default function MenuGrid({ selectedCategory }) {
               <button onClick={() => addToCart(item)} className="add-btn">
                 Add to Cart
               </button>
+              {/*a heart icon for favorites ADD LATER!!*/}
+
 
             </div>
           </article>

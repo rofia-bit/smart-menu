@@ -36,7 +36,6 @@ export default function LoginSidebar({ isOpen, onClose, user, onLogin, onLogout 
   }, [user]);
 
   const handleLoginLocal = (creds) => {
-    // forward to parent App handler
     if (onLogin) onLogin(creds);
     // keep prompt logic in this component (App keeps sidebar open)
   };
