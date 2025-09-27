@@ -1,13 +1,42 @@
 import React, { useState } from "react";
+import api from "../../api/api"; // use the shared axios instance
 
 export default function LoginForm({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!username || !password) return alert("Fill all fields");
-    onLogin({ username, password });
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      // Adjust endpoint if your backend uses a different route (e.g. "auth/token/" or "login/")
+      const res = await api.post("token/", { username, password });
+
+      // Expecting { access, refresh } or { token } depending on backend
+      const { access, refresh, token } = res.data;
+
+      // Store tokens where src/api/api.ts looks for them
+      if (access || token) {
+        localStorage.setItem("access_token", access || token);
+      }
+      if (refresh) {
+        localStorage.setItem("refresh_token", refresh);
+      }
+
+      // Notify parent with username + tokens (App will persist user state)
+      if (onLogin) onLogin({ username, access: access || token, refresh });
+    } catch (err) {
+      console.error("Login error:", err);
+      setError("Login failed. Check credentials or try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -28,8 +57,10 @@ export default function LoginForm({ onLogin }) {
         placeholder="Enter password"
       />
 
-            <div className="auth-actions">
-        <button type="submit" className="primary-btn">Login</button>
+      <div className="auth-actions">
+        <button type="submit" className="primary-btn" disabled={loading}>
+          {loading ? "Signing in..." : "Login"}
+        </button>
         <button
           type="button"
           className="secondary-btn"
@@ -38,6 +69,8 @@ export default function LoginForm({ onLogin }) {
           Sign up
         </button>
       </div>
+
+      {error && <div style={{ color: "crimson", marginTop: 8 }}>{error}</div>}
     </form>
   );
 }

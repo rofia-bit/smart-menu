@@ -38,6 +38,7 @@
 
 
 .menu-card {
+  position: relative; /* added */
   background: #ffffff;
   border-radius: 0.75rem;
   border: 1px solid #e5e7eb;
@@ -183,6 +184,57 @@
   background: #f97316;
   color: #fff;
   transform: translateY(-1px);
+}
+
+/* favorite button in bottom-left */
+.fav-btn {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.95);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 14px rgba(15,23,42,0.06);
+  cursor: pointer;
+  transition: transform 140ms ease, background 140ms ease;
+  padding: 0;
+  z-index: 5;
+  color: #9ca3af; /* default icon color */
+}
+.fav-btn:active { transform: scale(0.96); }
+.fav-btn:focus { outline: 2px solid rgba(249,115,22,0.14); }
+
+/* lucide svg inside button should inherit color */
+.fav-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  display: block;
+}
+
+/* active state = red heart + subtle fill */
+.fav-btn.active {
+  background: rgba(239,68,68,0.06);
+  color: #ef4444; /* heart red */
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 20px rgba(239,68,68,0.06);
+}
+
+/* ensure button doesn't overlap important content on very small screens */
+@media (max-width: 420px) {
+  .fav-btn {
+    left: 8px;
+    bottom: 8px;
+    width: 32px;
+    height: 32px;
+  }
+  .fav-btn svg { width: 16px; height: 16px; }
 }
 
 /* make states  responsive */

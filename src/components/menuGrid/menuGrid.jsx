@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Heart as HeartIcon } from "lucide-react";
 import "./menuGrid.css"; 
 
 export default function MenuGrid({ selectedCategory }) {
@@ -7,7 +8,26 @@ export default function MenuGrid({ selectedCategory }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  
+  // favorites persisted locally
+  const [favorites, setFavorites] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("fav_items") || "[]");
+    } catch {
+      return [];
+    }
+  });
+
+  const toggleFavorite = (id) => {
+    setFavorites((prev) => {
+      const exists = prev.includes(id);
+      const next = exists ? prev.filter((i) => i !== id) : [...prev, id];
+      try { localStorage.setItem("fav_items", JSON.stringify(next)); } catch {
+        // Ignore localStorage errors
+      }
+      return next;
+    });
+  };
+
   const fetchMenu = () => {
     setLoading(true);
     setError(null);
@@ -86,6 +106,16 @@ export default function MenuGrid({ selectedCategory }) {
       <div className="menu-grid">
         {filteredItems.map((item) => (
           <article key={item.item_id} className="menu-card">
+            {/* favorite heart (bottom-left) */}
+            <button
+              className={`fav-btn ${favorites.includes(item.item_id) ? "active" : ""}`}
+              onClick={(e) => { e.stopPropagation(); toggleFavorite(item.item_id); }}
+              aria-pressed={favorites.includes(item.item_id)}
+              title={favorites.includes(item.item_id) ? "Remove favorite" : "Add to favorites"}
+            >
+              <HeartIcon />
+            </button>
+
             {item.image ? (
               <img
                 src={item.image}
@@ -103,9 +133,6 @@ export default function MenuGrid({ selectedCategory }) {
               <button onClick={() => addToCart(item)} className="add-btn">
                 Add to Cart
               </button>
-              {/*a heart icon for favorites ADD*/}
-
-
             </div>
           </article>
 

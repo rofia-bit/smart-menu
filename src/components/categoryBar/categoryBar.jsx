@@ -1,33 +1,47 @@
 import React, { useRef } from "react";
-import "./categoryBar.css"; 
-import { ChevronLeft, ChevronRight } from "lucide-react"; 
+import "./categoryBar.css";
+import { ChevronLeft, ChevronRight, Coffee, Heart, Pizza, Salad, IceCream, CupSoda, Croissant } from "lucide-react";
 
 import dessertSVG from "../../assets/dessert.svg";
-import seadfoodSVG from "../../assets/seafood.svg";
-import chickenSVG from "../../assets/chicken.svg";
 import Drinks from "../../assets/Drinks.svg";
-import HotDrinksSVG from "../../assets/HotDrinks.svg";
-import gelatoSVG from "../../assets/gelato.svg";
 import bakerySVG from "../../assets/bakery.svg";
-import piazzaSVG from "../../assets/piazza.svg";
 
-const categories = [
-  { name: "For you", icon: chickenSVG },
-  { name: "Pizzas", icon: piazzaSVG },
-  { name: "Salads", icon: seadfoodSVG },
-  { name: "Desserts", icon: dessertSVG },
-  { name: "Drinks", icon: Drinks },
-  { name: "Hot Drinks", icon: HotDrinksSVG },
-  { name: "Gelato", icon: gelatoSVG },
-  { name: "Bakery", icon: bakerySVG },
+// keep explicit order here
+const categoriesOrder = [
+  "For you",
+  "Pizzas",
+  "Salads",
+  "Desserts",
+  "Drinks",
+  "Hot Drinks",
+  "Gelato",
+  "Bakery",
 ];
+
+// lucide components map
+const lucideMap = {
+  "For you": Heart,
+  Pizzas: Pizza,
+  Salads: Salad,
+  "Hot Drinks": Coffee,
+  Gelato: IceCream,
+  Drinks: CupSoda,
+  Bakery: Croissant,
+};
+
+// svg map
+const svgMap = {
+  Desserts: dessertSVG,
+
+  Bakery: bakerySVG,
+};
 
 const CategoryBar = ({ selectedCategory, onCategoryChange }) => {
   const containerRef = useRef(null);
 
   const scroll = (direction) => {
     if (!containerRef.current) return;
-    const scrollAmount = 200; 
+    const scrollAmount = 200;
     containerRef.current.scrollBy({
       left: direction === "left" ? -scrollAmount : scrollAmount,
       behavior: "smooth",
@@ -37,29 +51,47 @@ const CategoryBar = ({ selectedCategory, onCategoryChange }) => {
   return (
     <div className="category-bar">
       <button className="scroll-btn left" onClick={() => scroll("left")}>
-        <ChevronLeft size={24} />
+        <ChevronLeft size={20} color="rgba(255,255,255,0.95)" />
       </button>
 
       <div className="category-container" ref={containerRef}>
-        {categories.map((category) => (
-          <div
-            key={category.name}
-            onClick={() => onCategoryChange(category.name)}
-            className={`category-item ${
-              selectedCategory === category.name ? "active" : ""
-            }`}
-          >
-            <img
-              src={category.icon}
-              alt={category.name}
-              className="category-icon"
-            />
-            <span className="category-label">{category.name}</span>
-          </div>
-        ))}
+        {categoriesOrder.map((name) => {
+          const IconComp = lucideMap[name];
+          const svgSrc = svgMap[name];
+          const isActive = selectedCategory === name;
+          const itemClass = `category-item ${isActive ? "active" : ""}`;
+
+          return (
+            <div
+              key={name}
+              onClick={() => onCategoryChange(name)}
+              className={itemClass}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => { if (e.key === "Enter") onCategoryChange(name); }}
+            >
+              <div className="category-icon-wrap" aria-hidden>
+                {IconComp ? (
+                  <IconComp
+                    size={20}
+                    stroke="currentColor"
+                    color="none"
+                    className="category-lucide"
+                    aria-hidden
+                  />
+                ) : svgSrc ? (
+                  <img src={svgSrc} alt={name} className="category-icon" />
+                ) : null}
+              </div>
+
+              <span className="category-label">{name}</span>
+            </div>
+          );
+        })}
       </div>
+
       <button className="scroll-btn right" onClick={() => scroll("right")}>
-        <ChevronRight size={24} />
+        <ChevronRight size={20} color="rgba(255,255,255,0.95)" />
       </button>
     </div>
   );

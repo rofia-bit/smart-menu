@@ -27,15 +27,24 @@ export default function App() {
     setCartItems((prev) => [...prev, item]);
   };
 
-  const handleLogin = ({ username }) => {
-    // simple login (backend will replace later)
+  // UPDATED: accept tokens from LoginForm and persist them
+  const handleLogin = ({ username, access, refresh }) => {
+    // persist username
     setUser(username);
+
+    // store tokens for api interceptor
+    if (access) localStorage.setItem("access_token", access);
+    if (refresh) localStorage.setItem("refresh_token", refresh);
+
     // sidebar open so the questionnaire prompt can show
     setIsLoginOpen(true);
   };
 
   const handleLogout = () => {
     setUser(null);
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    sessionStorage.removeItem("access_token");
   };
 
   return (
