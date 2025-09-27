@@ -17,7 +17,7 @@ export default function LoginForm({ onLogin }) {
         type="text"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-        placeholder="Choose a username"
+        placeholder="Enter Username"
       />
 
       <label>Password</label>
@@ -28,7 +28,7 @@ export default function LoginForm({ onLogin }) {
         placeholder="Enter password"
       />
 
-      <div className="auth-actions">
+            <div className="auth-actions">
         <button type="submit" className="primary-btn">Login</button>
         <button
           type="button"

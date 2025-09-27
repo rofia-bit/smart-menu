@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import './assets/fonts/style.css'
 import CategoryBar from "./components/categoryBar/categoryBar";
 import MenuGrid from "./components/menuGrid/menuGrid";
 import CartButton from "./components/Cart/cartbutton";

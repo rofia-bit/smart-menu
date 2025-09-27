@@ -18,7 +18,15 @@ const resources = {
       questionnairePrompt: "Would you like to do a short questionnaire?",
       yes: "Yes",
       remindLater: "Remind me later",
-      languageLabel: "Language:"
+      languageLabel: "Language:",
+      menuTitle: "Our Menu",
+      menuSubtitle: "Choose your favorite",
+      loadingMenu: "Loading menu...",
+      loadingSub: "Fetching fresh items for you",
+      loadErrorTitle: "Could not load menu",
+      loadErrorSub: "Check your connection or try again.",
+      retry: "Retry",
+      done: "Done"
     }
   },
   fr: {
@@ -37,7 +45,15 @@ const resources = {
       questionnairePrompt: "Souhaitez‑vous faire un court questionnaire ?",
       yes: "Oui",
       remindLater: "Me le rappeler plus tard",
-      languageLabel: "Langue :"
+      languageLabel: "Langue :",
+      menuTitle: "Notre Menu",
+      menuSubtitle: "Choisissez votre favori",
+      loadingMenu: "Chargement du menu…",
+      loadingSub: "Récupération des éléments",
+      loadErrorTitle: "Impossible de charger le menu",
+      loadErrorSub: "Vérifiez votre connexion ou réessayez.",
+      retry: "Réessayer",
+      done: "Terminé"
     }
   },
   ar: {
@@ -56,7 +72,15 @@ const resources = {
       questionnairePrompt: "هل تود إجراء استبيان قصير؟",
       yes: "نعم",
       remindLater: "ذكرني لاحقًا",
-      languageLabel: "اللغة:"
+      languageLabel: "اللغة:",
+      menuTitle: "قائمتنا",
+      menuSubtitle: "اختر المفضلات",
+      loadingMenu: "جارٍ تحميل القائمة…",
+      loadingSub: "جلب العناصر",
+      loadErrorTitle: "تعذّر تحميل القائمة",
+      loadErrorSub: "تحقق من الاتصال أو حاول مرة أخرى.",
+      retry: "إعادة المحاولة",
+      done: "إنهاء"
     }
   }
 };

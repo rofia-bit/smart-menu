@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { UserRoundCheck, ShoppingBag, ChevronDown, ChevronUp, Phone } from "lucide-react";
+import { useTranslation } from "react-i18next"; //  translation hook link to other pages later
 import LoginForm from "./loginForm";
 import Questions from "./questions";
 import "./Login.css";
@@ -13,6 +14,7 @@ const sections = [
 ];
 
 export default function LoginSidebar({ isOpen, onClose, user, onLogin, onLogout }) {
+  const { t, i18n } = useTranslation();
   const [openSections, setOpenSections] = useState([0, 1]);
   const [promptShown, setPromptShown] = useState(false);
   const [showQuestionPrompt, setShowQuestionPrompt] = useState(false);
@@ -49,12 +51,17 @@ export default function LoginSidebar({ isOpen, onClose, user, onLogin, onLogout 
     setOpenSections((prev) => (prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx]));
   };
 
+  const handleLanguageChange = (lang) => {
+    i18n.changeLanguage(lang);
+    localStorage.setItem("sm_lang", lang);
+  };
+
   return (
     <div className={`sidebar ${isOpen ? "open" : ""}`}>
       <div className="sidebar-header">
-        <h2>{user ? `Hi, ${user}` : "Welcome"}</h2>
+        <h2 className="sidebarFont">{user ? t("Hi", { name: user },"!") : t("Welcome Customer !")}</h2>
         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-          {user && <button className="logout-btn" onClick={handleLogoutLocal}>Sign out</button>}
+          {user && <button className="logout-btn" onClick={handleLogoutLocal}>{t("Sign Out")}</button>}
           <button className="close-btn" onClick={onClose}>✕</button>
         </div>
       </div>
@@ -62,7 +69,7 @@ export default function LoginSidebar({ isOpen, onClose, user, onLogin, onLogout 
       <div className="sidebar-content">
         {!user ? (
           <div className="auth-panel">
-            <p className="auth-intro">Log in to view your account, orders and rewards.</p>
+            <p className="auth-intro">{t("Login Intro")}</p>
             <LoginForm onLogin={handleLoginLocal} />
           </div>
         ) : showQuestions ? (
@@ -79,11 +86,7 @@ export default function LoginSidebar({ isOpen, onClose, user, onLogin, onLogout 
                 {section.title}
                 {section.items.length > 0 && (
                   <span className="arrow">
-                    {openSections.includes(idx) ? (
-                      <ChevronUp size={18} color="#f97316" />
-                    ) : (
-                      <ChevronDown size={18} color="#f97316" />
-                    )}
+                    {openSections.includes(idx) ? <ChevronUp size={18} color="#f97316" /> : <ChevronDown size={18} color="#f97316" />}
                   </span>
                 )}
               </div>
@@ -103,21 +106,27 @@ export default function LoginSidebar({ isOpen, onClose, user, onLogin, onLogout 
       </div>
 
       <div className="sidebar-language">
-        <label htmlFor="language-select">Language:</label>
-        <select id="language-select" defaultValue="en" style={{ padding: "6px 10px", borderRadius: 6 }}>
+        <label htmlFor="language-select">{t("Language :")}</label>
+       <button className="languageButton">
+        <select
+          id="language-select"
+          value={i18n.language || "en"}
+          onChange={(e) => handleLanguageChange(e.target.value)}
+        >
           <option value="en">English</option>
           <option value="fr">Français</option>
-          <option value="ar">Arabic</option>
+          <option value="ar">العربية</option>
         </select>
+        </button>
       </div>
 
-      {/* Questionnaire prompt modal - rendered with a portal to document.body so it centers on the page */}
+      {/* Questionnaire prompt modal - rendered with a portal*/}
       {showQuestionPrompt &&
         createPortal(
           <div className="question-modal-backdrop" onMouseDown={() => setShowQuestionPrompt(false)}>
             <div className="question-modal" onMouseDown={(e) => e.stopPropagation()}>
-              <h3>We'd like to know more about you</h3>
-              <p className="muted">Would you like to do a short questionnaire?</p>
+              <h3>{t("questionnaireTitle")}</h3>
+              <p className="muted">{t("questionnairePrompt")}</p>
               <div className="question-actions">
                 <button
                   className="primary-btn"
@@ -126,10 +135,10 @@ export default function LoginSidebar({ isOpen, onClose, user, onLogin, onLogout 
                     setShowQuestions(true);
                   }}
                 >
-                  Yes
+                  {t("yes")}
                 </button>
                 <button className="secondary-btn" onClick={() => setShowQuestionPrompt(false)}>
-                  Remind me later
+                  {t("remindLater")}
                 </button>
               </div>
             </div>

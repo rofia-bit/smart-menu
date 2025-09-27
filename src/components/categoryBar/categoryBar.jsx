@@ -12,8 +12,8 @@ import bakerySVG from "../../assets/bakery.svg";
 import piazzaSVG from "../../assets/piazza.svg";
 
 const categories = [
-  { name: "Pizzas", icon: piazzaSVG },
   { name: "For you", icon: chickenSVG },
+  { name: "Pizzas", icon: piazzaSVG },
   { name: "Salads", icon: seadfoodSVG },
   { name: "Desserts", icon: dessertSVG },
   { name: "Drinks", icon: Drinks },

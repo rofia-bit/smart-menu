@@ -25,11 +25,14 @@
   padding: 15px 20px;
   background: rgb(239, 64, 0);
   color: #fff;
-  font-weight: bold;
-  font-size: 1.15rem;
+
+  font-size: 20px;
   border-bottom: 1px solid #f3f3f3;
 }
-
+.sidebarFont{
+  font-size: 20px !important;
+  font-weight: 800 !important;
+}
 .close-btn {
   background: none;
   border: none;
@@ -163,8 +166,17 @@
   margin-right: 6px;
   font-size: 1.1rem;
 }
-
-
+.languageButton{
+  border: none;
+  margin:0 1rem ;
+  border-radius: 5px;
+  padding: 1px;
+  color: #ececec;
+  background: linear-gradient(135deg, rgb(242, 65, 1) 0%, rgb(255, 0, 0) 50%, rgb(255, 18, 9) 100%);
+}
+#language-Select{
+  border: none;
+}
 
 
 

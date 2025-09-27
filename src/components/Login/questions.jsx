@@ -10,7 +10,7 @@ export default function Questions({ onClose }) {
       </header>
 
       <div className="questions-body">
-                      {/* Placeholder --backend will add actual questions later */}
+                      {/* Placeholder backend will add actual questions later */}
         <p className="muted">Questions will be added here.</p>
       </div>
 

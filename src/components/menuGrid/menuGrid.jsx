@@ -103,7 +103,7 @@ export default function MenuGrid({ selectedCategory }) {
               <button onClick={() => addToCart(item)} className="add-btn">
                 Add to Cart
               </button>
-              {/*a heart icon for favorites ADD LATER!!*/}
+              {/*a heart icon for favorites ADD*/}
 
 
             </div>
