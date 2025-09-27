@@ -127,8 +127,8 @@ export default function MenuGrid({ selectedCategory }) {
             )}
 
             <div className="menu-card-body">
-              <h3>{item.name}</h3>
-              <p className="menu-desc">{item.description}</p>
+              <h3>{item.name.en}</h3>
+              <p className="menu-desc">{item.description.en}</p>
               <p className="menu-price">${item.price}</p>
               <button onClick={() => addToCart(item)} className="add-btn">
                 Add to Cart
